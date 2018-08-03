@@ -8,7 +8,7 @@
 		<servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.nequi.mbs.fis609.config.ConfigServices</param-value>
+			<param-value>pruebas.config.ConfigServices</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -16,9 +16,4 @@
 		<servlet-name>MDWServices</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-
-	<login-config>
-		<auth-method>BASIC</auth-method>
-		<realm-name>test realm</realm-name>
-	</login-config>
 </web-app>
