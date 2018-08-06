@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://nequi.co/message/backout/services/promotions/bonus"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bco="http://nequi.co/message/backout/services/promotions/bonus">
+
+	<element name="backoutRQ">
+		<complexType>
+			<sequence>
+				<element ref="bco:backoutRequest"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="backoutRequest" type="bco:backoutRequestType"></element>
+
+	<complexType name="backoutRequestType">
+		<sequence>
+			<element name="header" type="bco:bcoHeaderType" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="body" type="bco:bcoBodyType" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+	<element name="backoutResponse" type="bco:backoutResponseType"></element>
+	<complexType name="backoutResponseType">
+		<sequence>
+			<element name="header" type="bco:responseHeaderType"></element>
+			<element name="body" type="bco:responseBodyType"></element>
+		</sequence>
+	</complexType>
+	<element name="backoutRS">
+		<complexType>
+			<sequence>
+				<element ref="bco:backoutResponse"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="responseHeaderType">
+		<sequence>
+			<element name="messageId" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="responseDate" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="status" type="bco:statusType" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="provider" type="bco:providerType" maxOccurs="1"
+				minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="statusType">
+		<sequence>
+			<element name="code" type="string" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="system" type="string" maxOccurs="1" minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="providerType">
+		<sequence>
+			<element name="id" type="string" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="name" type="string" maxOccurs="1" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="responseBodyType"></complexType>
+
+	<complexType name="consumerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="containerType">
+		<sequence>
+			<element name="id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="name" type="string" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="payloadType"></complexType>
+
+	<complexType name="bcoHeaderType">
+		<sequence>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="consumer" type="bco:consumerType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="messageID" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="consumerDate" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="container" type="bco:containerType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="region" type="string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="bcoBodyType">
+		<sequence>
+			<element name="promoData" type="bco:PromoDataType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="customerData" type="bco:CustomerDataType"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="PromoDataType">
+		<sequence>
+			<element name="service" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="operation" type="string" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element name="region" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="commerce" type="bco:CommerceType"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="rule" type="bco:RuleType" minOccurs="0"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="BonusDataType"></complexType>
+
+	<complexType name="CashBackDataType"></complexType>
+
+	<complexType name="CustomerDataType">
+		<sequence>
+			<element name="clientId" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="documentType" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="documentNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="phoneNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="cifId" type="string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="accountNumber" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="transactionValue" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RuleType">
+		<sequence>
+			<element name="idRule" type="string"></element>
+			<element name="value" type="string"></element>
+			<element name="accountingAccount" type="string"></element>
+			<element name="notificationType" type="string"></element>
+			<element name="message" type="string"></element>
+			<element name="subject" type="string"></element>
+			<element name="valueAvailable" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="maxBudget" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+            <element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+        </sequence>
+	</complexType>
+
+	<complexType name="CommerceType">
+		<sequence>
+			<element name="idCommerce" type="string"></element>
+			<element name="idTerminal" type="string" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+</schema>

@@ -8,9 +8,17 @@ import com.nequi.cmm.consumer.registry.ServiceRegistry;
 import com.nequi.cmm.consumer.util.CommonServiceConsumerUtil;
 import com.nequi.cmm.consumer.util.UtilJSON;
 import com.nequi.cmm.messaging.esb.ResponseHeaderOutMessageType;
+import com.nequi.mdw.common.tracerv7.model.bco.BcoBodyType;
+import com.nequi.mdw.common.tracerv7.model.bco.BcoHeaderType;
 import com.nequi.mdw.common.tracerv7.service.GenericLogger;
 
 import prueba.jpa.model.Parametro;
+import pruebas.bco.promotions.BackoutRequestType;
+import pruebas.bco.promotions.CommerceType;
+import pruebas.bco.promotions.ConsumerType;
+import pruebas.bco.promotions.CustomerDataType;
+import pruebas.bco.promotions.PromoDataType;
+import pruebas.bco.promotions.RuleType;
 import pruebas.seiya.ChannelType;
 import pruebas.seiya.ContainerType;
 import pruebas.seiya.DestinationType;
@@ -306,5 +314,57 @@ public class CommonUtil {
                                 .getResponseHeaderOut().getHeader()
                                 .getResponseStatus().getStatusCode());
 
+    }
+
+    public static BackoutRequestType getBackoutRequestType(String accountNumber,
+            String cifId, String clientId, String document, String documenType,
+            String phoneNUmber, String value, String service, String operation, String region, String comerceId, String terminalId, String accountiAccount, String description, String ruleId, String maxBuget, String message, String notificationType, String subject, String valueAvailabe) {
+        BackoutRequestType backoutRequestType = new BackoutRequestType();
+        pruebas.bco.promotions.BcoBodyType bcoBodyType = new pruebas.bco.promotions.BcoBodyType();
+        CustomerDataType customerDataType = new CustomerDataType();
+        customerDataType.setAccountNumber(accountNumber);
+        customerDataType.setCifId(cifId);
+        customerDataType.setClientId(clientId);
+        customerDataType.setDocumentNumber(document);
+        customerDataType.setDocumentType(documenType);
+        customerDataType.setPhoneNumber(phoneNUmber);
+        customerDataType.setTransactionValue(value);
+        bcoBodyType.setCustomerData(customerDataType);
+        PromoDataType promoDataType = new PromoDataType();
+        promoDataType.setService(service);
+        promoDataType.setOperation(operation);
+        promoDataType.setRegion(region);
+        CommerceType commerceType = new CommerceType();
+        commerceType.setIdCommerce(comerceId);
+        commerceType.setIdTerminal(terminalId);
+        promoDataType.setCommerce(commerceType);
+        RuleType ruleType = new RuleType();
+        ruleType.setAccountingAccount(accountiAccount);
+        ruleType.setDescription(description);
+        ruleType.setIdRule(ruleId);
+        ruleType.setMaxBudget(maxBuget);
+        ruleType.setMessage(message);
+        ruleType.setNotificationType(notificationType);
+        ruleType.setSubject(subject);
+        ruleType.setValue(value);
+        ruleType.setValueAvailable(valueAvailabe);
+        promoDataType.setRule(ruleType);
+        bcoBodyType.setPromoData(promoDataType);
+        backoutRequestType.setBody(bcoBodyType);
+        pruebas.bco.promotions.BcoHeaderType bcoHeaderType = new pruebas.bco.promotions.BcoHeaderType();
+        pruebas.bco.promotions.ConsumerType consumerType = new pruebas.bco.promotions.ConsumerType();
+        consumerType.setId("prueba");
+        consumerType.setName("prueba");
+        bcoHeaderType.setConsumer(consumerType);
+        bcoHeaderType.setConsumerDate("2018-03-25");
+        pruebas.bco.promotions.ContainerType containerType = new pruebas.bco.promotions.ContainerType();
+        containerType.setId(valueAvailabe);
+        containerType.setName("prueba");
+        bcoHeaderType.setContainer(containerType);
+        bcoHeaderType.setMessageID("asdsad");
+        bcoHeaderType.setName("prueba");
+        bcoHeaderType.setRegion(region);        
+        backoutRequestType.setHeader(bcoHeaderType);
+        return backoutRequestType;
     }
 }

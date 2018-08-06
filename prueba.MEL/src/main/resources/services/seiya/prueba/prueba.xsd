@@ -7,6 +7,20 @@
     <complexType name="pruebaRQType">
     	<sequence>
     		<element name="phoneNumber" type="string"></element>
+    		<element name="value" type="string"></element>
+    		<element name="service" type="string"></element>
+    		<element name="operation" type="string"></element>
+    		<element name="region" type="string"></element>
+    		<element name="comerceId" type="string"></element>
+    		<element name="terminalId" type="string"></element>
+    		<element name="accountiAccount" type="string"></element>
+    		<element name="description" type="string"></element>
+    		<element name="ruleId" type="string"></element>
+    		<element name="maxBudget" type="string"></element>
+    		<element name="message" type="string"></element>
+    		<element name="notificationType" type="string"></element>
+    		<element name="subject" type="string"></element>
+    		<element name="valueAvailable" type="string"></element>
     	</sequence>
     </complexType>
     

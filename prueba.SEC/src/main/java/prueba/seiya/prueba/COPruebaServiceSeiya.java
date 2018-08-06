@@ -1,6 +1,7 @@
 package prueba.seiya.prueba;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +20,9 @@ import prueba.jpa.service.impl.ClientJPAServiceIMPL;
 import prueba.service.ServiceBean;
 import prueba.util.CommonUtil;
 import prueba.util.ConstantPrueba;
+import prueba.util.SendJmsMessageServiceBean;
+import pruebas.bco.promotions.BackoutRQ;
+import pruebas.bco.promotions.BackoutRequestType;
 import pruebas.seiya.MessageRQ;
 import pruebas.seiya.MessageRS;
 import pruebas.seiya.PruebaRQType;
@@ -40,6 +44,9 @@ public class COPruebaServiceSeiya extends CallServiceUtil
 
     private GenericLogger logger;
     private ServiceRegistry serviceRegistry;
+
+    @EJB
+    private SendJmsMessageServiceBean sendJmsMessageServiceBean;
 
     @PostConstruct
     void init() {
@@ -85,6 +92,34 @@ public class COPruebaServiceSeiya extends CallServiceUtil
 
                 return CommonUtil.generateResponseAsString(messageRS, logger);
             }
+
+            BackoutRequestType backoutRequestType = CommonUtil
+                    .getBackoutRequestType(client.getNumeroCuenta(),
+                            client.getCifId(),
+                            String.valueOf(client.getClienteId()),
+                            client.getNumeroId(), client.getTipoId(),
+                            pruebaRQType.getPhoneNumber(),
+                            pruebaRQType.getValue(), pruebaRQType.getService(),
+                            pruebaRQType.getOperation(),
+                            pruebaRQType.getRegion(),
+                            pruebaRQType.getComerceId(),
+                            pruebaRQType.getTerminalId(),
+                            pruebaRQType.getAccountiAccount(),
+                            pruebaRQType.getDescription(),
+                            pruebaRQType.getRuleId(),
+                            pruebaRQType.getMaxBudget(),
+                            pruebaRQType.getMessage(),
+                            pruebaRQType.getNotificationType(),
+                            pruebaRQType.getSubject(),
+                            pruebaRQType.getValueAvailable());
+
+            BackoutRQ backoutRQ = new BackoutRQ();
+            backoutRQ.setBackoutRequest(backoutRequestType);
+
+            String jsonInString = UtilJSON.parseJSONToString(backoutRQ);
+
+            sendJmsMessageServiceBean.sendJmsStringMessage(jsonInString,
+                    ConstantPrueba.COMMON_STRING_COLA_PROMOCIONES);
 
         } catch (Exception e) {
             logger.traceError(ConstantPrueba.ERROR_DEFAULT_MSG, e);

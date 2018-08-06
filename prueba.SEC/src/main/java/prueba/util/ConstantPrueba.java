@@ -237,6 +237,12 @@ public final class ConstantPrueba {
     public static final String COMMON_STRING_CHARGE_CARD_PARAMETER_DEFAULT = "B001";
     public static final String COMMON_STRING_ERROR_CLIENT_WITHOUT_TARGET = "2-CCSB000675";
     public static final String COMMON_STRING_ERROR_ASSIGN_TARGET = "64L";
+    
+    
+    public static final String COMMON_STRING_SEND_JMS_MGE_SERVICE_BEAN = "SendJmsMessageServiceBean";
+    public static final String COMMON_STRING_QUEUE_FACTORY = "jms/SHP-CF";
+    public static final String COMMON_STRING_ENVIROMENT = "java:comp/env";
+    public static final String COMMON_STRING_COLA_PROMOCIONES = "jms/BCO-PromotionCntlr.Q";
 
     private ConstantPrueba() {
     }
